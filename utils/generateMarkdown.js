@@ -13,8 +13,40 @@ function renderLicenseSection(license) {}
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   return `# ${data.title}
+  ${name}
+  ${description}
+  ${tableOfContents}
+  ${installation}
+  ${usage}
+  ${license}
+  ${contributors}
+  ${gitHubName}
+  ${email}
+
+
 
 `;
 }
 
 module.exports = generateMarkdown;
+
+
+const fs = require('fs');
+
+const writeFile= fileContent => {
+    return new Promise((resolve, reject) =>{
+        fs.writeFile('./dist/README.md', fileContent, err => {
+            if(err){
+                reject(err);
+                return;
+            }
+
+            resolve({
+                ok: true,
+                message: 'Readme created!'
+            });
+        });
+    });
+};
+
+module.exports ={writeFile}

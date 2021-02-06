@@ -1,7 +1,10 @@
+// TODO: Include packages needed for this application
 const inquirer = require('inquirer')
-const {writeFile, copyFile} = require
+const {writeFile, copyFile}= require('./utils/generateMarkdown');
 
-const questions = () => {
+
+// TODO: Create an array of questions for user input
+const questions = => {
     return inquirer.prompt ([
         {
             type:'input',
@@ -73,6 +76,8 @@ const questions = () => {
             type:'input',
             name: 'Lisense',
             message:'Which license would you like?',
+            choices: ['[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)',
+        '[![License](https://img.shields.io/badge/License-Boost%201.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)',],
             validate: nameInput => {
                 if(nameInput) {
                     return true;
@@ -110,9 +115,61 @@ const questions = () => {
         },
         {
             type:'input',
-            name:'Questions',
-            message:''
-        }
+            name:'GitHub username',
+            message:'What is your GitHub username?',
+            validate: nameInput => {
+                if(nameInput) {
+                    return true;
+                }else {
+                    console.log('Please enter your GitHub username!');
+                    return false;
+                }
+            }
+        },
+        {
+            type:'input',
+            name:'Email',
+            message:'What is your email address?',
+            validate: nameInput => {
+                if(nameInput) {
+                    return true;
+                }else {
+                    console.log('Please enter your email address!');
+                    return false;
+                }
+            }
+        },
     ])
 }
+
+// TODO: Create a function to write README file
+const generateMarkdown = (name, github) => {
+    return 
+    `
+    # name
+        ${name}
+    ## Description
+        ${description}
+    ## Table of Contents
+        ${tableOfContents}
+    ## Installation
+        ${installation}
+    ## Usage
+        ${usage}
+    ## License
+
+    ## Contributing
+
+    ## Tests
+    
+    ## Questions
+
+    `;
+};
+// TODO: Create a function to initialize app
+function init() {}
+
+// Function call to initialize app
+//init();
 questions()
+.then(writeFile)

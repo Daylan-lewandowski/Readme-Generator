@@ -1,0 +1,1 @@
+Readme Generator made using Node, quick and easy way to generate a professional readme with ease. Just have the user input information about their project when prompted.
