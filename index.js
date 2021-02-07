@@ -1,10 +1,13 @@
 // TODO: Include packages needed for this application
-const inquirer = require('inquirer')
-const {writeFile, copyFile}= require('./utils/generateMarkdown');
+const inquirer = require('inquirer');
+const fs = require('fs');
+const util =require('util');
+const writeFile = util.promisify(fs.writeFile);
+const generateMarkdown= require ('./utils/generateMarkdown');
 
 
 // TODO: Create an array of questions for user input
-const questions = => {
+function promptUser(){
     return inquirer.prompt ([
         {
             type:'input',
@@ -73,11 +76,10 @@ const questions = => {
             }
         },
         {
-            type:'input',
+            type:'list',
             name: 'Lisense',
             message:'Which license would you like?',
-            choices: ['[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)',
-        '[![License](https://img.shields.io/badge/License-Boost%201.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)',],
+            choices: ["MIT", "ISC", "Mozilla", "Apache", "GNU"],
             validate: nameInput => {
                 if(nameInput) {
                     return true;
@@ -115,7 +117,7 @@ const questions = => {
         },
         {
             type:'input',
-            name:'GitHub username',
+            name:'username',
             message:'What is your GitHub username?',
             validate: nameInput => {
                 if(nameInput) {
@@ -143,33 +145,41 @@ const questions = => {
 }
 
 // TODO: Create a function to write README file
-const generateMarkdown = (name, github) => {
-    return 
-    `
-    # name
-        ${name}
-    ## Description
-        ${description}
-    ## Table of Contents
-        ${tableOfContents}
-    ## Installation
-        ${installation}
-    ## Usage
-        ${usage}
-    ## License
 
-    ## Contributing
+function init() {
+    try { 
+        const data = promptUser();
+        const generateContent = generateMarkdown(data);
 
-    ## Tests
-    
-    ## Questions
-
-    `;
-};
-// TODO: Create a function to initialize app
-function init() {}
+        await writeFile('./dist/README.md', generateContent);
+        console.log('README created! Success!');
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
 
 // Function call to initialize app
-//init();
-questions()
-.then(writeFile)
+
+// questions()
+// .then(writeFile)
+// .then(readMeData => {
+//     return generateMarkdown(readMeData);
+// })
+// .then(readMeMd => {
+//     return writeFile(readMeMd);
+// })
+// .then(writeFileResponse => {
+//     console.log(writeFileResponse);
+//     return copyFile();
+// })
+// .then (copyFileResponse => {
+//     console.log(copyFileResponse);
+// })
+// .catch(err => {
+//     console.log(err);
+//});
+
+// TODO: Create a function to initialize app
+
+init();
