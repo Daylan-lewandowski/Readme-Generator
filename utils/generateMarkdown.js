@@ -27,20 +27,27 @@ function renderLicenseSection(license) {}
     
      ## Description
      ${data.Description}
+
      ## Installation
      ${data.Installation}
+
      ## Usage
      ${data.Usage}
+
      ## Contribution
-     ${data.Contribution}
+     ${data.Contributors}
+
      ## Test
      ${data.Test}
+
      ## Questions?
      
      
      You can Email me at: ${data.Email}
      
      You can contact me on Github at: [${data.username}](https://github.com/${data.username})
+
+     Generated using github.com/Daylan-lewandowski/Readme-Generator
    
      `;
  }

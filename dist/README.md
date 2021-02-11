@@ -1,6 +1,6 @@
 
 
-        Run0Buddy
+        README generator
 
      ## Table of Contents
      * [Description](#description)
@@ -12,20 +12,20 @@
      * [Questions?](#questions)  
     
      ## Description
-     app to allow runners to meet and run together
+     To create a professional README generate to dynamically create readmes for projects to save time and energy.
      ## Installation
-     go to run-buddy.com and follow on screen instructions
+     Step 1. Install node.js, step 2. install node inquirer by typing npm install inquirer in the command line. Invoke the application by typing node index into the command line.
      ## Usage
-     Get more people active
+     To save time and effort in creating readmes' for applications.
      ## Contribution
      undefined
      ## Test
-     run-buddy.test
+     Open command line and type npm test.
      ## Questions?
      
      
-     You can Email me at: daylan.lewandowski@yahoo.com
+     You can Email me at: Daylan.lewandowski@yahoo.com
      
-     You can contact me on Github at: [daylan-lewandowski](https://github.com/daylan-lewandowski)
+     You can contact me on Github at: [Daylan-lewandowski](https://github.com/Daylan-lewandowski)
    
      
