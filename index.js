@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const util =require('util');
-const writeFile = util.promisify(fs.writeFile);
+const writeFileAsync = util.promisify(fs.writeFile);
 const generateMarkdown= require ('./utils/generateMarkdown');
 
 
@@ -36,19 +36,19 @@ function promptUser(){
             }
             
         },
-        {
-            type: 'input',
-            name: 'Table of Contents',
-            message:'Please enter a table of contents.',
-            validate: nameInput => {
-                if(nameInput) {
-                    return true;
-                }else {
-                    console.log('Please enter a Table of Contents for your project!');
-                    return false;
-                }
-            }
-        },
+        //{
+        //     type: 'input',
+        //     name: 'Table of Contents',
+        //     message:'Please enter a table of contents.',
+        //     validate: nameInput => {
+        //         if(nameInput) {
+        //             return true;
+        //         }else {
+        //             console.log('Please enter a Table of Contents for your project!');
+        //             return false;
+        //         }
+        //     }
+        // },
         {
             type: 'input',
             name: 'Installation',
@@ -144,20 +144,21 @@ function promptUser(){
     ])
 }
 
-// TODO: Create a function to write README file
+    // TODO: Create a function to write README file
 
-function init() {
-    try { 
-        const data = promptUser();
+ async function init() {
+     try{ 
+        const data =  await promptUser();
         const generateContent = generateMarkdown(data);
 
-        await writeFile('./dist/README.md', generateContent);
+        await writeFileAsync('./dist/README.md', generateContent);
         console.log('README created! Success!');
     }
     catch(err) {
         console.log(err);
     }
-}
+ }
+
 
 // Function call to initialize app
 
@@ -180,6 +181,6 @@ function init() {
 //     console.log(err);
 //});
 
-// TODO: Create a function to initialize app
+// TODO: Create a function to initialize a
 
-init();
+init ();
